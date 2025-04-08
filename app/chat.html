@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Grok 4 DevOps</title>
+  <style>
+    body { font-family: Arial; background: #0d1117; color: white; padding: 20px; }
+    input, button { padding: 10px; margin-top: 10px; width: 100%; }
+    #response { margin-top: 20px; white-space: pre-wrap; background: #161b22; padding: 10px; border-radius: 10px; }
+  </style>
+</head>
+<body>
+  <h1>🤖 Grok 4 DevOps</h1>
+  <input type="text" id="prompt" placeholder="Ask me anything DevOps...">
+  <button onclick="askGrok()">Ask Grok</button>
+  <div id="response"></div>
+
+  <script>
+    async function askGrok() {
+      const prompt = document.getElementById('prompt').value;
+      const res = await fetch('/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt })
+      });
+      const data = await res.json();
+      document.getElementById('response').innerText = data.response || JSON.stringify(data);
+    }
+  </script>
+</body>
+</html>
